@@ -16,6 +16,35 @@ Usage
 You can choose to either use the `*Sync` functions for non-async usage or use the normal functions which return promises.  
 The functions that return promises will automatically use webworkers or WebCrypto API in browsers that support it, so they are recommended!
 
+#### KeyDerivation
+```
+// iterations is optional and defaults to 35k iterations
+var keyBuffer = justencrypt.KeyDerivation.computeSync(new Buffer(rawPassword, 'utf8'), saltBuffer, iterations);
+```
+
+#### Encryption
+The result of `encrypt` / `encryptSync` is encoded as `iter || saltLen8 || salt || iv || tag || ct`,  
+when this is fed into `decrypt` / `decryptSync` it will be able decode the salt and iterations used.
+
+```
+// iterations is optional and defaults to 35k iterations
+var encryptedBuffer = justencrypt.Encryption.encryptSync(new Buffer(rawPassword, 'utf8'), dataBuffer, iterations);
+
+var decryptedDataBuffer = justencrypt.Encryption.decryptSync(encryptedBuffer, new Buffer(rawPassword, 'utf8'));
+```
+
+#### EncryptionMnemonic
+To make the result of `encrypt` / `encryptSync` human readable (so it is easier to write down) it's possible to encode it as an mnemonic.  
+We're using the Bitcoin BIP39 way of encoding entropy to mnemonic, but ignoring the (weak) password protection BIP39 originally had.  
+We also ensure the data is padded correctly.
+
+**IMPORTANT:** This is only meant to be used to encode results of `encrypt` / `encryptSync`, don't use this for anything else!
+
+```
+var mnemonicString = justencrypt.EncryptionMnemonic.encode(encryptedBuffer);
+var encryptedBuffer = justencrypt.EncryptionMnemonic.decode(mnemonicString);
+```
+
 Development / Contributing
 --------------------------
 You should have `mocha`, `istanbul` and `grunt-cli` installed globally, if not run `npm install -g mocha instanbul grunt-cli`.
