@@ -1,5 +1,7 @@
 module.exports = {
+    KeyDerivation: require('./lib/keyderivation'),
+    KeyDerivationAsync: require('./lib/keyderivation_async'),
     Encryption: require('./lib/encryption'),
-    EncryptionMnemonic: require('./lib/encryption_mnemonic'),
-    KeyDerivation: require('./lib/keyderivation')
+    EncryptionAsync: require('./lib/encryption_async'),
+    EncryptionMnemonic: require('./lib/encryption_mnemonic')
 };

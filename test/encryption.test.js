@@ -1,6 +1,7 @@
 var assert = require('assert');
-var justencrypt = require('../');
 var _ = require('lodash');
+
+var justencrypt = require('../');
 var vectors = require('./vectors');
 
 describe('encryption', function() {
