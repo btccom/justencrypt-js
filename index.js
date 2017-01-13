@@ -1,5 +1,8 @@
 module.exports = {
+    Buffer: Buffer,
+
+    KeyDerivation: require('./lib/keyderivation'),
     Encryption: require('./lib/encryption'),
     EncryptionMnemonic: require('./lib/encryption_mnemonic'),
-    KeyDerivation: require('./lib/keyderivation')
+    webCryptoPbkdf2: require('./lib/pbkdf2_sha512-webcrypto')
 };
