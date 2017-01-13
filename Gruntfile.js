@@ -58,7 +58,7 @@ module.exports = function (grunt) {
         watch : {
             options : {},
             browserifytest : {
-                files : ['test.js', 'test/*', 'test/**/*', 'lib/*', 'lib/**/*'],
+                files : ['test.js', 'index.js', 'test/*', 'test/**/*', 'lib/*', 'lib/**/*'],
                 tasks : ['browserify:test']
             }
         }

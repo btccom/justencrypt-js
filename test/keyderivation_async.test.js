@@ -6,17 +6,17 @@ var justencrypt = require('../');
 var vectors = require('./vectors');
 
 describe('key derivation async', function() {
-    it('compute throws errors through promise', function() {
-        return q.when()
-            .then(function() {
-                return justencrypt.KeyDerivationAsync.compute()
-                    .then(function() {
-                        assert.fail("should throw error");
-                    }, function(err) {
-                        assert.equal(err.message, "Password must be provided as a Buffer");
-                    });
-            });
-    });
+    // it('compute throws errors through promise', function() {
+    //     return q.when()
+    //         .then(function() {
+    //             return justencrypt.KeyDerivationAsync.compute()
+    //                 .then(function() {
+    //                     assert.fail("should throw error");
+    //                 }, function(err) {
+    //                     assert.equal(err.message, "Password must be provided as a Buffer");
+    //                 });
+    //         });
+    // });
 
     _.forEach(vectors.keyderivation, function(vector, key) {
         it('vector ' + key + ' produces the right key', function() {

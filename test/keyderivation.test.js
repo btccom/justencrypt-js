@@ -24,17 +24,29 @@ describe('key derivation', function() {
         var salt = new Buffer("e73dc3b0ad0a8fba2128b3c991f7fb6961f085810e33c528103be38b7b193e38", 'hex');
 
         assert.equal(justencrypt.KeyDerivation.computeSync(password, salt).toString('hex'), "54e4445ac677d0b5c2a8ccad171645107646ab1c110f8b5da8fbe936d02afd6a");
-
     });
 
     _.forEach(vectors.keyderivation, function(vector, key) {
-        it('vector ' + key + ' produces the right key', function() {
+        it('computeSync vector ' + key + ' produces the right key', function() {
             var password = new Buffer(vector.password, 'hex');
             var salt = new Buffer(vector.salt, 'hex');
             var iterations = vector.iterations;
             var output = justencrypt.KeyDerivation.computeSync(password, salt, iterations);
 
             assert.equal(output.toString('hex'), vector.output);
+        });
+    });
+
+    _.forEach(vectors.keyderivation, function(vector, key) {
+        it('computeAsync vector ' + key + ' produces the right key', function() {
+            var password = new Buffer(vector.password, 'hex');
+            var salt = new Buffer(vector.salt, 'hex');
+            var iterations = vector.iterations;
+
+            return justencrypt.KeyDerivation.computeAsync(password, salt, iterations)
+                .then(function(output) {
+                    assert.equal(output.toString('hex'), vector.output);
+                });
         });
     });
 });

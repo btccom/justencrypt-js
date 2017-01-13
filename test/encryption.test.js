@@ -13,9 +13,9 @@ describe('encryption async', function() {
         return q.when()
             .then(function() {
                 return justencrypt.Encryption.encrypt(plainText, password, 1)
-                    .then(function (cipherText) {
+                    .then(function(cipherText) {
                         return justencrypt.Encryption.decrypt(cipherText, password)
-                            .then(function (_plainText) {
+                            .then(function(_plainText) {
                                 assert.equal(_plainText.toString('hex'), plainText.toString('hex'));
                             });
                     });
@@ -29,9 +29,9 @@ describe('encryption async', function() {
         return q.when()
             .then(function() {
                 return justencrypt.Encryption.encrypt(plainText, password)
-                    .then(function (cipherText) {
+                    .then(function(cipherText) {
                         return justencrypt.Encryption.decrypt(cipherText, password)
-                            .then(function (_plainText) {
+                            .then(function(_plainText) {
                                 assert.equal(_plainText.toString('hex'), plainText.toString('hex'));
                             });
                     });
