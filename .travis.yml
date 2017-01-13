@@ -1,0 +1,23 @@
+language: node_js
+
+branches:
+  only: 
+   - master
+
+node_js:
+ - '0.11'
+ - '0.12'
+ - '4'
+ - '5.11'
+ - '6.3.0'
+ - '7.1.0'
+ - 'node'
+ - 'iojs'
+
+before_install:
+ - git submodule update --init --recursive
+ - npm install -g grunt-cli
+
+script:
+ - mocha
+ - npm lint

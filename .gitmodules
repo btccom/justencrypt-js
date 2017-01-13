@@ -1,0 +1,3 @@
+[submodule "vendor/asmcrypto.js"]
+	path = vendor/asmcrypto.js
+	url = https://github.com/vibornoff/asmcrypto.js

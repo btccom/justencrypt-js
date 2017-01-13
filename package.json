@@ -1,0 +1,46 @@
+{
+  "name": "justencrypt",
+  "version": "0.0.1",
+  "author": {
+    "name": "Ruben de Vries <ruben@rubensayshi.com>"
+  },
+  "contributors": [
+    {
+      "name": "Ruben de Vries",
+      "email": "ruben@rubensayshi.com"
+    },
+    {
+      "name": "Thomas Kerin"
+    }
+  ],
+  "main": "index.js",
+  "engines": {
+    "node": ">= 0.12.0"
+  },
+  "browser": {
+    "./lib/pbkdf2_sha512.js": "./lib/pbkdf2_sha512-asm.js"
+  },
+  "dependencies": {
+    "assert": "^1.4.1",
+    "bip39": "^2.2.0",
+    "lodash": "^4.17.4",
+    "randombytes": "^2.0.3",
+    "sjcl": "^1.0.6"
+  },
+  "devDependencies": {
+    "brfs": "*",
+    "grunt": "~0.4.2",
+    "grunt-browserify": "~5.0.0",
+    "grunt-contrib-concat": "~0.5.1",
+    "grunt-contrib-uglify": "~2.0.0",
+    "grunt-exec": "^1.0.1",
+    "jscs": "~3.0.7",
+    "jshint": "~2.9.1",
+    "mocha": "*"
+  },
+  "scripts": {
+    "test": "mocha",
+    "browserify": "grunt build",
+    "lint": "./node_modules/jscs/bin/jscs index.js lib/ test/ && ./node_modules/jshint/bin/jshint index.js lib/ test/"
+  }
+}
