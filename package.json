@@ -1,6 +1,7 @@
 {
   "name": "justencrypt",
   "version": "0.0.1",
+  "license": "MIT",
   "author": {
     "name": "Ruben de Vries <ruben@rubensayshi.com>"
   },
@@ -35,12 +36,12 @@
     "grunt-contrib-uglify": "~2.0.0",
     "grunt-exec": "^1.0.1",
     "jscs": "~3.0.7",
-    "jshint": "~2.9.1",
-    "mocha": "*"
+    "jshint": "~2.9.1"
   },
   "scripts": {
     "test": "mocha",
     "browserify": "grunt build",
-    "lint": "./node_modules/jscs/bin/jscs index.js lib/ test/ && ./node_modules/jshint/bin/jshint index.js lib/ test/"
+    "lint": "./node_modules/jscs/bin/jscs index.js lib/ test/ && ./node_modules/jshint/bin/jshint index.js lib/ test/",
+    "coverage": "istanbul cover _mocha test/**/*.js"
   }
 }
