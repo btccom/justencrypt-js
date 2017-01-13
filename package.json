@@ -36,6 +36,7 @@
     "grunt-browserify": "~5.0.0",
     "grunt-contrib-concat": "~0.5.1",
     "grunt-contrib-uglify": "~2.0.0",
+    "grunt-contrib-watch": "^1.0.0",
     "grunt-exec": "^1.0.1",
     "jscs": "~3.0.7",
     "jshint": "~2.9.1"

@@ -47,7 +47,8 @@ var encryptedBuffer = justencrypt.EncryptionMnemonic.decode(mnemonicString);
 
 Development / Contributing
 --------------------------
-You should have `mocha`, `istanbul` and `grunt-cli` installed globally, if not run `npm install -g mocha instanbul grunt-cli`.
+You should have `mocha`, `istanbul` and `grunt-cli` installed globally, if not run `npm install -g mocha instanbul grunt-cli`.  
+Also recommended to have `phantomjs >= 1.9.8` on `$PATH` to speed up the `asmcrypto.js` build; https//github.com/Medium/phantomjs/releases/download/v1.9.19/phantomjs-1.9.8-linux-x86_64.tar.bz2
 
 Unit Tests are created with Mocha and can be ran with `npm test` (or `mocha`)
 

@@ -13,7 +13,7 @@ describe('key derivation async', function() {
                     .then(function() {
                         assert.fail("should throw error");
                     }, function(err) {
-                        assert.equal("" + err, "AssertionError: Password must be provided as a Buffer");
+                        assert.equal(err.message, "Password must be provided as a Buffer");
                     });
             });
     });
