@@ -55,4 +55,22 @@ _.forEach(modules, function(module) {
             });
         });
     });
+
+    describe(module.name + " benchmark", function() {
+        var digest = module.module.digest;
+
+        it('should be benchmarked', function() {
+            return q.all(_.repeat("1", 10).split("").map(function() {
+                var password = new Buffer("ff", 'hex');
+                var salt = new Buffer("ff", 'hex');
+                var iterations = 35000;
+
+                if (module.async) {
+                    return digest(password, salt, iterations, justencrypt.KeyDerivation.keySizeBits / 8);
+                } else {
+                    digest(password, salt, iterations, justencrypt.KeyDerivation.keySizeBits / 8);
+                }
+            }));
+        });
+    });
 });
