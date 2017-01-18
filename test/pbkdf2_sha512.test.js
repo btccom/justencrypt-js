@@ -57,20 +57,34 @@ _.forEach(modules, function(module) {
     });
 
     describe(module.name + " benchmark", function() {
+        var n = 10; // n loops
+        var iterations = 35000;
         var digest = module.module.digest;
+        var password = new Buffer("ff", 'hex');
+        var salt = new Buffer("ff", 'hex');
 
-        it('should be benchmarked', function() {
-            return q.all(_.repeat("1", 10).split("").map(function() {
-                var password = new Buffer("ff", 'hex');
-                var salt = new Buffer("ff", 'hex');
-                var iterations = 35000;
+        it('first with ' + iterations + ' iterations', function() {
+            var start = new Date;
 
-                if (module.async) {
-                    return digest(password, salt, iterations, justencrypt.KeyDerivation.keySizeBits / 8);
-                } else {
-                    digest(password, salt, iterations, justencrypt.KeyDerivation.keySizeBits / 8);
-                }
-            }));
+            return q.when().then(function() {
+                return digest(password, salt, iterations, justencrypt.KeyDerivation.keySizeBits / 8);
+            }).then(function() {
+                var time = new Date - start;
+
+                console.log(module.name + ' ' + time + 'ms/first');
+            });
+        });
+
+        it('benchmark ' + n + ' loops with ' + iterations + ' iterations', function() {
+            var start = new Date;
+
+            return q.all(_.repeat("1", n).split("").map(function() {
+                return digest(password, salt, iterations, justencrypt.KeyDerivation.keySizeBits / 8);
+            })).then(function() {
+                var time = new Date - start;
+
+                console.log(module.name + ' ' + (time / n) + 'ms/loop');
+            });
         });
     });
 });
