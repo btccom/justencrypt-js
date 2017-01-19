@@ -22,7 +22,7 @@ before_install:
 
 script:
   - mocha
-  - npm lint
+  - npm run-script lint
 
 env:
   global:
