@@ -24,7 +24,6 @@
   "dependencies": {
     "assert": "^1.4.1",
     "bip39": "^2.2.0",
-    "lodash": "^4.17.4",
     "q": "^1.4.1",
     "randombytes": "^2.0.3",
     "sjcl": "^1.0.6",
@@ -39,7 +38,8 @@
     "grunt-contrib-watch": "^1.0.0",
     "grunt-exec": "^1.0.1",
     "jscs": "~3.0.7",
-    "jshint": "~2.9.1"
+    "jshint": "~2.9.1",
+    "lodash": "^4.17.4"
   },
   "scripts": {
     "test": "mocha",
