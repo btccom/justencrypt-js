@@ -21,7 +21,7 @@ module.exports = function (grunt) {
             },
             dist : {
                 files : {
-                    'build/justencrypt.min.js' : ['<%= browserify.dest %>']
+                    'build/justencrypt.min.js' : ['<%= browserify.justencrypt.dest %>']
                 }
             }
         },
@@ -37,7 +37,7 @@ module.exports = function (grunt) {
                     },
                     transform: ['brfs']
                 },
-                src: 'main.js',
+                src: 'index.js',
                 dest: 'build/justencrypt.js'
             },
             test: {
