@@ -7,7 +7,7 @@ module.exports = function (grunt) {
          * Exec
          */
         exec: {
-            asmcryptobuild: 'cd ./vendor/asmcrypto.js; npm install; grunt --with pbkdf2-hmac-sha512'
+            asmcryptobuild: 'cd ./vendor/asmcrypto.js; npm install; grunt --with pbkdf2-hmac-sha512,aes-gcm'
         },
 
         /*
