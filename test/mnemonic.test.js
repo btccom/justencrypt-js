@@ -24,13 +24,13 @@ describe('mnemonic', function() {
 
         // assert wrong padding byte is detected
         assert.throws(function() {
-            justencrypt.EncryptionMnemonic.decode(bip39.entropyToMnemonic("80808080" + data.toString('hex')))
+            justencrypt.EncryptionMnemonic.decode(bip39.entropyToMnemonic("80808080" + data.toString('hex')));
         }, /There is only one way to pad a string/);
 
         // assert wrong padding length is detected
         //  note; we have to 4 bytes, otherwise mnemonic is invalid
         assert.throws(function() {
-            justencrypt.EncryptionMnemonic.decode(bip39.entropyToMnemonic("8181818181818181" + data.toString('hex')))
+            justencrypt.EncryptionMnemonic.decode(bip39.entropyToMnemonic("8181818181818181" + data.toString('hex')));
         }, /There is only one way to pad a string/);
     });
 
