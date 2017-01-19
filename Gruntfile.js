@@ -4,6 +4,46 @@ module.exports = function (grunt) {
         pkg: grunt.file.readJSON('package.json'),
 
         /*
+         * Connect (used to open connection for saucelabs)
+         */
+        connect: {
+            server: {
+                options: {
+                    base: '',
+                    port: 9999
+                }
+            }
+        },
+
+        /*
+         * Saucelabs
+         */
+        'saucelabs-mocha': {
+            all: {
+                options: {
+                    // username: 'saucelabs-user-name', // if not provided it'll default to ENV SAUCE_USERNAME (if applicable)
+                    // key: 'saucelabs-key', // if not provided it'll default to ENV SAUCE_ACCESS_KEY (if applicable)
+                    urls: [
+                        'http://127.0.0.1:9999/test/run-tests.html?grep=' + encodeURIComponent("benchmark") + '&invert=true'
+                    ],
+                    browsers: require('./saucelabs-browsers'),
+                    build: process.env.TRAVIS_JOB_ID || ('99' + ((new Date).getTime() / 1000).toFixed(0) + (Math.random() * 1000).toFixed(0)),
+                    testname: 'mocha tests',
+                    throttled: 2,
+                    statusCheckAttempts: 360, // statusCheckAttempts * pollInterval = total time
+                    pollInterval: 4000,
+                    sauceConfig: {
+                        'command-timeout': 600,
+                        'idle-timeout': 360,
+                        'max-duration': 900, // doesn't seem to take effect
+                        'video-upload-on-pass': true
+                    }
+                }
+            }
+        },
+
+
+        /*
          * Exec
          */
         exec: {
@@ -74,10 +114,13 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-browserify');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-connect');
+    grunt.loadNpmTasks('grunt-saucelabs');
     grunt.loadNpmTasks('grunt-exec');
 
     grunt.registerTask('asmcrypto', ['exec:asmcryptobuild']);
     grunt.registerTask('build', ['asmcrypto', 'browserify', 'uglify']);
     grunt.registerTask('default', ['build']);
+    grunt.registerTask('test-browser', ['connect', 'saucelabs-mocha']);
 };
 
