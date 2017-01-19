@@ -7,21 +7,28 @@ module.exports = function (grunt) {
          * Exec
          */
         exec: {
-            asmcryptobuild: 'cd ./vendor/asmcrypto.js; npm install; grunt --with pbkdf2-hmac-sha512,aes-gcm'
+            // does 'sources concat' as tasks, because we don't want it minified by the asmcrypto grunt
+            //  make sure if you add algo's here you also add uglify wrangler excludes where necessary!
+            asmcryptobuild: 'cd ./vendor/asmcrypto.js; npm install; grunt sources concat --with pbkdf2-hmac-sha512,aes-gcm'
         },
 
         /*
          * Uglify
          */
-        uglify : {
+        uglify: {
             options: {
                 mangle: {
-                    except: ['Buffer']
+                    except: ['Buffer', 'sha512_asm', 'asm']
                 }
             },
-            dist : {
-                files : {
-                    'build/justencrypt.min.js' : ['<%= browserify.justencrypt.dest %>']
+            justencrypt: {
+                files: {
+                    'build/justencrypt.min.js': ['<%= browserify.justencrypt.dest %>']
+                }
+            },
+            test: {
+                files: {
+                    'build/test.min.js': ['<%= browserify.test.dest %>']
                 }
             }
         },
@@ -41,11 +48,11 @@ module.exports = function (grunt) {
                 dest: 'build/justencrypt.js'
             },
             test: {
-                options : {
-                    browserifyOptions : {
+                options: {
+                    browserifyOptions: {
                         standalone: 'justencryptTEST'
                     },
-                    transform : ['brfs']
+                    transform: ['brfs']
                 },
                 src: 'test.js',
                 dest: 'build/test.js'
@@ -55,11 +62,11 @@ module.exports = function (grunt) {
         /*
          * Watch
          */
-        watch : {
-            options : {},
-            browserifytest : {
-                files : ['test.js', 'index.js', 'test/*', 'test/**/*', 'lib/*', 'lib/**/*'],
-                tasks : ['browserify:test']
+        watch: {
+            options: {},
+            test: {
+                files: ['test.js', 'index.js', 'test/*', 'test/**/*', 'lib/*', 'lib/**/*'],
+                tasks: ['browserify:test', 'uglify:test']
             }
         }
     });
