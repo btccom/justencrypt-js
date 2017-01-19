@@ -1,23 +1,23 @@
 language: node_js
-
 branches:
-  only: 
-   - master
-
+  only:
+  - master
 node_js:
- - '0.11'
- - '0.12'
- - '4'
- - '5.11'
- - '6.3.0'
- - '7.1.0'
- - 'node'
- - 'iojs'
-
+- '0.11'
+- '0.12'
+- '4'
+- '5.11'
+- 6.3.0
+- 7.1.0
+- node
+- iojs
 before_install:
- - git submodule update --init --recursive
- - npm install -g grunt-cli
-
+- git submodule update --init --recursive
+- npm install -g grunt-cli
 script:
- - mocha
- - npm lint
+- mocha
+- npm lint
+env:
+  global:
+  - secure: rlD7vKBHr8omaGM1sS/D8HWQMx7jWbVLWdd/ARO40vJWsWJe//SDJjtWIX0fs5EpTy1BRywudn3U5+VIp1KvPuF6TK/w46e+5SxHiEV0FzigoTRo6+gtHBjVjDiEPdxOOZ5a5UnQFgsQ5iR/vFf2xjy4zkCYU88lhJZRxcCfT0uxZYjHB15vEhuj8HRkuFkdeVq5peaDxlzNkBLs4LYSqMIJ5EWb5JHAPs2s1HMziZGwRjmxSeypCAb4+dNx+bd5XUBLO34m9i/q5uWnWMv5Zcs/lkq7uO4fmm5sW2X0/qggTejWpxuTN82STiYKNq/ySyXRgW0/qrlWmcGjKS8PeAm2JliiZHmGOcB9HxsV74kmWlZFtGXDjjlPkZdFlvhVTkXwjlWgisbJZxbNg7MB0yj0hOhlgHhOTd18Le4kbeMR2S3v0auBkY4kdD4c29h/f9KsQcmhmRpnYfv3zNA8s7rpfxBkV9LcT3jq9fMTSXbCvbvoLHQ+NYz1d5WFnliFA2AoPj+iloxWp1A1G8F6u16+937t3EmQZ+Fy57pilzeO1UOrziTLuFkcrJWZS42ZgUEG4HO2BeLkzYj5P+5zfBXkC0rLhS5uVFrTPBcgH4Nwc1ysKKQUAamWm0PATTuDBZ1trG0EULQDzM+1iBtmPOFit6+SBH4OGXRjJS7mmME=
+  - secure: HgI0Dx6i6lLh0/75xxI7zYBGqOahM003xjGy/rr1YD6jRYQUGJvC0GPQ5jimlFCSI7G7Y2JTRK27pHhpBDZ5QbXAY7eJvDNKIycKVYuroWmtFL5jj/tGYsbHVkqTaWl72898Y0z15TxDhurZuCCuKJ47m6kHqARBtXfCF1CkvT9zhNmHd0D665VfAEtkzRPF5wdGKpA78lAiCE+xF781ESLIwJhx9EW2tzKoumqOYK3dIwHAcin+d83CaEkQzOQ8N0Bdt1gurl7KSVQZ6/e742jX2gOi4alRuu5X02jKPeiJ0eZwM6dN0P3IGZJiD3oEa5I0Hms9mqN3nnFQrzZDhYq/flmRBT5Otn09wD6De4a3EPQ0XYvWx2HW1FG3ZzRYRFaV8OfkKFfGHSg6PVg36YdOnoJ3/K2ex16KZqNqC/CtmZ2kMO75Yp3NABeTtkZoQR8HWtAiHMe3xfzFD3H40I54gynGQHtXTiagTWmXRvY7Iws/eTWtk96/bfnOz6GKM5UzjU5sjzGUcO+ZbUeyslk3RypZeMmvPCsvGr4POb6BHM3ePLOxIweO9TGgUe1TTl5QcFrFAtwoV0n74s/msOHB9O01xPLZUIMlKb9FCZaq5T1gYwYYfJb8OiRZU66GzGxa8AIaLAQ7Ze37k+/flgEoNjsWMTxKjkVMU/+TkbU=

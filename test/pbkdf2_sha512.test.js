@@ -18,7 +18,7 @@ var modules = [
 _.forEach(modules, function(module) {
     // don't test modules on platforms that don't support them at all
     if (isNodeJS && !module.node || isWeb && !module.web) {
-        return
+        return;
     }
 
     describe(module.name, function() {
@@ -34,7 +34,7 @@ _.forEach(modules, function(module) {
         });
 
         describe("test", function() {
-            it.skip('check isSupported', function () {
+            it.skip('check isSupported', function() {
                 if (typeof module.module.isSupported === "undefined") {
                     this.skip("module does not have isSupported");
                 }
@@ -42,7 +42,7 @@ _.forEach(modules, function(module) {
                 // async module should have async isSupported
                 if (module.async) {
                     return module.module.isSupported()
-                        .then(function (isSupported) {
+                        .then(function(isSupported) {
                             assert.equal(isSupported, shouldBeSupported, shouldBeSupported ? "should be supported" : "shouldn't be supported");
                         });
                 } else {
@@ -50,8 +50,8 @@ _.forEach(modules, function(module) {
                 }
             });
 
-            _.forEach(vectors.keyderivation, function (vector, key) {
-                it('vector ' + key + ' produces the right key', function () {
+            _.forEach(vectors.keyderivation, function(vector, key) {
+                it('vector ' + key + ' produces the right key', function() {
                     if (!shouldBeSupported) {
                         this.skip("not supported");
                     }
@@ -62,7 +62,7 @@ _.forEach(modules, function(module) {
 
                     if (module.async) {
                         return digest(password, salt, iterations, justencrypt.KeyDerivation.keySizeBits / 8)
-                            .then(function (output) {
+                            .then(function(output) {
                                 assert.equal(output.toString('hex'), vector.output);
                             });
                     } else {
@@ -85,12 +85,12 @@ _.forEach(modules, function(module) {
                     this.skip("not supported");
                 }
 
-                var start = new Date;
+                var start = new Date();
 
                 return q.when().then(function() {
                     return digest(password, salt, iterations, justencrypt.KeyDerivation.keySizeBits / 8);
                 }).then(function() {
-                    var time = new Date - start;
+                    var time = (new Date()) - start;
 
                     console.log(module.name + ' ' + time + 'ms/first');
                 });
@@ -101,12 +101,12 @@ _.forEach(modules, function(module) {
                     this.skip("not supported");
                 }
 
-                var start = new Date;
+                var start = new Date();
 
                 return q.all(_.repeat("1", n).split("").map(function() {
                     return digest(password, salt, iterations, justencrypt.KeyDerivation.keySizeBits / 8);
                 })).then(function() {
-                    var time = new Date - start;
+                    var time = (new Date()) - start;
 
                     console.log(module.name + ' ' + (time / n) + 'ms/loop');
                 });

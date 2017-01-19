@@ -26,12 +26,12 @@ module.exports = [{
     // latest Safari
     browserName: 'Safari',
     version: 'latest',
-    webcrypto: true
+    webcrypto: false
 }, {
     // latest Safari as of writing
     browserName: 'Safari',
     version: '10.0',
-    webcrypto: true
+    webcrypto: false
 }, {
     // latest edge
     browserName: 'MicrosoftEdge',

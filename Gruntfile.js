@@ -6,13 +6,13 @@ module.exports = function (grunt) {
     var platformsIdx = process.argv.indexOf('--platforms');
     var platforms = null;
     if (platformsIdx !== -1) {
-        platforms = process.argv[platformsIdx + 1];
+        platforms = process.argv[platformsIdx + 1].split(",");
     }
 
     var browsersIdx = process.argv.indexOf('--browsers');
     var browsers = null;
     if (browsersIdx !== -1) {
-        browsers = process.argv[browsersIdx + 1];
+        browsers = process.argv[browsersIdx + 1].split(",");
     }
 
     grunt.initConfig({
