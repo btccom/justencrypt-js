@@ -8,11 +8,27 @@
     </script>
     <script type="text/javascript">
         window.onload = function() {
-            console.log('onload');
-
             var scrollInterval = setInterval(function() {
                 window.scrollTo(0, document.body.scrollHeight);
             }, 100);
+
+            /*
+             * setup config from query string
+             */
+            var qs = justencryptTEST.qs.parse(window.location.href.replace(/^.+?\?/, ''));
+            Object.keys(justencryptTEST.config).forEach(function(key) {
+                if (typeof qs[key] !== "undefined") {
+                    if (qs[key] === "true") {
+                        justencryptTEST.config[key] = true;
+                    } else if (qs[key] === "false") {
+                        justencryptTEST.config[key] = false;
+                    } else {
+                        justencryptTEST.config[key] = qs[key];
+                    }
+                }
+            });
+
+            console.log('config', JSON.stringify(justencryptTEST.config, null, 4));
 
             var runner = mocha.run();
             var failedTests = [];

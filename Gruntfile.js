@@ -1,5 +1,20 @@
 module.exports = function (grunt) {
 
+    /*
+     * parse CLI args for saucelabs filtering
+     */
+    var platformsIdx = process.argv.indexOf('--platforms');
+    var platforms = null;
+    if (platformsIdx !== -1) {
+        platforms = process.argv[platformsIdx + 1];
+    }
+
+    var browsersIdx = process.argv.indexOf('--browsers');
+    var browsers = null;
+    if (browsersIdx !== -1) {
+        browsers = process.argv[browsersIdx + 1];
+    }
+
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
@@ -19,16 +34,43 @@ module.exports = function (grunt) {
          * Saucelabs
          */
         'saucelabs-mocha': {
-            all: {
+            with_webcrypto: {
                 options: {
                     // username: 'saucelabs-user-name', // if not provided it'll default to ENV SAUCE_USERNAME (if applicable)
                     // key: 'saucelabs-key', // if not provided it'll default to ENV SAUCE_ACCESS_KEY (if applicable)
                     urls: [
-                        'http://127.0.0.1:9999/test/run-tests.html?grep=' + encodeURIComponent("benchmark") + '&invert=true'
+                        // invert grep benchmarks + webcrypto=true
+                        'http://127.0.0.1:9999/test/run-tests.html?grep=' + encodeURIComponent("benchmark") + '&invert=true&webcrypto=true'
                     ],
-                    browsers: require('./saucelabs-browsers'),
+                    browsers: require('./saucelabs-browsers')
+                                .filter(function(browser) { return browser.webcrypto; })
+                                .filter(function(browser) { return !browsers || browsers.indexOf(browser.browserName) !== -1; }),
                     build: process.env.TRAVIS_JOB_ID || ('99' + ((new Date).getTime() / 1000).toFixed(0) + (Math.random() * 1000).toFixed(0)),
-                    testname: 'mocha tests',
+                    testname: 'mocha tests - webcrypto=true',
+                    throttled: 2,
+                    statusCheckAttempts: 360, // statusCheckAttempts * pollInterval = total time
+                    pollInterval: 4000,
+                    sauceConfig: {
+                        'command-timeout': 600,
+                        'idle-timeout': 360,
+                        'max-duration': 900, // doesn't seem to take effect
+                        'video-upload-on-pass': true
+                    }
+                }
+            },
+            without_webcrypto: {
+                options: {
+                    // username: 'saucelabs-user-name', // if not provided it'll default to ENV SAUCE_USERNAME (if applicable)
+                    // key: 'saucelabs-key', // if not provided it'll default to ENV SAUCE_ACCESS_KEY (if applicable)
+                    urls: [
+                        // invert grep benchmarks + webcrypto=false
+                        'http://127.0.0.1:9999/test/run-tests.html?grep=' + encodeURIComponent("benchmark") + '&invert=true&webcrypto=false'
+                    ],
+                    browsers: require('./saucelabs-browsers')
+                                .filter(function(browser) { return !browser.webcrypto; })
+                                .filter(function(browser) { return !browsers || browsers.indexOf(browser.browserName) !== -1; }),
+                    build: process.env.TRAVIS_JOB_ID || ('99' + ((new Date).getTime() / 1000).toFixed(0) + (Math.random() * 1000).toFixed(0)),
+                    testname: 'mocha tests - webcrypto=false',
                     throttled: 2,
                     statusCheckAttempts: 360, // statusCheckAttempts * pollInterval = total time
                     pollInterval: 4000,
