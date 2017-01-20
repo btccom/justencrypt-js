@@ -15,6 +15,8 @@ module.exports = function (grunt) {
         browsers = process.argv[browsersIdx + 1].split(",");
     }
 
+    var local_saucelabs_build = ('99' + ((new Date).getTime() / 1000).toFixed(0) + (Math.random() * 1000).toFixed(0));
+
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
@@ -45,7 +47,7 @@ module.exports = function (grunt) {
                     browsers: require('./saucelabs-browsers')
                                 .filter(function(browser) { return browser.webcrypto; })
                                 .filter(function(browser) { return !browsers || browsers.indexOf(browser.browserName) !== -1; }),
-                    build: process.env.TRAVIS_JOB_ID || ('99' + ((new Date).getTime() / 1000).toFixed(0) + (Math.random() * 1000).toFixed(0)),
+                    build: process.env.TRAVIS_JOB_ID || local_saucelabs_build,
                     testname: 'mocha tests - webcrypto=true',
                     throttled: 2,
                     statusCheckAttempts: 360, // statusCheckAttempts * pollInterval = total time
@@ -69,7 +71,7 @@ module.exports = function (grunt) {
                     browsers: require('./saucelabs-browsers')
                                 .filter(function(browser) { return !browser.webcrypto; })
                                 .filter(function(browser) { return !browsers || browsers.indexOf(browser.browserName) !== -1; }),
-                    build: process.env.TRAVIS_JOB_ID || ('99' + ((new Date).getTime() / 1000).toFixed(0) + (Math.random() * 1000).toFixed(0)),
+                    build: process.env.TRAVIS_JOB_ID || local_saucelabs_build,
                     testname: 'mocha tests - webcrypto=false',
                     throttled: 2,
                     statusCheckAttempts: 360, // statusCheckAttempts * pollInterval = total time
