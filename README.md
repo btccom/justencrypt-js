@@ -1,10 +1,10 @@
 JustEncrypt
 ===========
 [![Latest Stable Version](https://badge.fury.io/js/justencrypt.svg)](https://www.npmjs.org/package/justencrypt)
-[![Build Status](https://travis-ci.org/btccom/justencrypt.png?branch=master)](https://travis-ci.org/btccom/justencrypt)
-[![Sauce Test Status](https://saucelabs.com/buildstatus/justencrypt-js)](https://saucelabs.com/u/team_blocktrail)
+[![Build Status](https://travis-ci.org/btccom/justencrypt-js.png?branch=master)](https://travis-ci.org/btccom/justencrypt-js)
+[![Sauce Test Status](https://saucelabs.com/buildstatus/justencrypt-js)](https://saucelabs.com/u/justencrypt-js)
 
-[![Sauce Test Status](https://saucelabs.com/browser-matrix/justencrypt-js.svg)](https://saucelabs.com/u/team_blocktrail)
+[![Sauce Test Status](https://saucelabs.com/browser-matrix/justencrypt-js.svg)](https://saucelabs.com/u/justencrypt-js)
 
 This package is being tested against;  
  - NodeJS:
