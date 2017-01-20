@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# grunt
+grunt
 
 PROJECTDIR=$(pwd)
 TMPDIR=$(uuidgen)
