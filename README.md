@@ -28,7 +28,7 @@ justencrypt.KeyDerivation.compute(new Buffer(rawPassword, 'utf8'), saltBuffer, i
 ```
 
 #### Encryption
-The result of `encrypt` is encoded as `iter || saltLen8 || salt || iv || tag || ct`,  
+The result of `encrypt` is encoded as `saltLen (uint8) || salt ($saltLen bytes) || iv (16 bytes) || ct || tag (16 bytes)`,  
 when this is fed into `decrypt` it will be able decode the salt and iterations used.
 
 ```js
