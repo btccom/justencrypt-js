@@ -70,6 +70,13 @@ Development / Contributing
 You should have `mocha`, `istanbul` and `grunt-cli` installed globally, if not run `npm install -g mocha instanbul grunt-cli`.  
 Also recommended to have `phantomjs >= 1.9.8` on `$PATH` to speed up the `asmcrypto.js` build; https//github.com/Medium/phantomjs/releases/download/v1.9.19/phantomjs-1.9.8-linux-x86_64.tar.bz2
 
+To start development you need to do:
+
+```bash
+git submodule update --init --recursive # for asmcrypto.js
+grunt
+```
+
 Unit Tests are created with Mocha and can be ran with `npm test` (or `mocha`)
 
 We also run jshint and jscs, these are automatically ran by [travis-ci](https://travis-ci.org/btccom/jusencrypt) for every commit and pull request.
