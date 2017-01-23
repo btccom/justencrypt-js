@@ -56,7 +56,7 @@ _.forEach(modules, function(module) {
                         this.skip("not supported");
                     }
 
-                    var password = new Buffer(vector.password, 'hex');
+                    var password = vector.password_utf8 ? new Buffer(vector.password_utf8, 'utf-8') : new Buffer(vector.password, 'hex');
                     var salt = new Buffer(vector.salt, 'hex');
                     var iterations = vector.iterations;
 

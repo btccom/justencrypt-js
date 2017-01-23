@@ -44,7 +44,7 @@ describe('key derivation', function() {
     });
 
     var testVector = function(vector) {
-        var password = new Buffer(vector.password, 'hex');
+        var password = vector.password_utf8 ? new Buffer(vector.password_utf8, 'utf-8') : new Buffer(vector.password, 'hex');
         var salt = new Buffer(vector.salt, 'hex');
         var iterations = vector.iterations;
 
