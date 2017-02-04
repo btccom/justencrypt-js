@@ -1,6 +1,6 @@
 var assert = require('assert');
 var _ = require('lodash');
-var q = require('q');
+var Promise = require('es6-promise').Promise;
 
 var justencrypt = require('../');
 var vectors = require('./vectors');
@@ -10,7 +10,7 @@ describe('encryption async', function() {
         var plainText = new Buffer("6a1efab8b1f788fba9e5c23d36e9bb96cfe455c14ecfa59c7c887adea934bf38", "hex");
         var password = new Buffer("70617373776f7264", "hex");
 
-        return q.when()
+        return Promise.resolve()
             .then(function() {
                 return justencrypt.Encryption.encrypt(plainText, password, 1)
                     .then(function(cipherText) {
@@ -26,7 +26,7 @@ describe('encryption async', function() {
         var plainText = new Buffer("6a1efab8b1f788fba9e5c23d36e9bb96cfe455c14ecfa59c7c887adea934bf38", "hex");
         var password = new Buffer("70617373776f7264", "hex");
 
-        return q.when()
+        return Promise.resolve()
             .then(function() {
                 return justencrypt.Encryption.encrypt(plainText, password)
                     .then(function(cipherText) {
@@ -39,7 +39,7 @@ describe('encryption async', function() {
     });
 
     it('encrypt throws errors through promise', function() {
-        return q.when()
+        return Promise.resolve()
             .then(function() {
                 return justencrypt.Encryption.encrypt()
                     .then(function() {
@@ -51,7 +51,7 @@ describe('encryption async', function() {
     });
 
     it('decrypt throws errors through promise', function() {
-        return q.when()
+        return Promise.resolve()
             .then(function() {
                 return justencrypt.Encryption.decrypt()
                     .then(function() {
@@ -72,7 +72,7 @@ describe('encryption async', function() {
 
             var firstEncrypt;
 
-            return q.when()
+            return Promise.resolve()
                 .then(function() {
                     // test output given this pt/pw/salt/iv matches the test vector
                     return justencrypt.Encryption.encryptWithSaltAndIV(pt, pw, salt, iv, iterations)
