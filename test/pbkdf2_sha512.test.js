@@ -1,6 +1,6 @@
 var assert = require('assert');
 var _ = require('lodash');
-var q = require('q');
+var Promise = require('es6-promise').Promise;
 
 var justencrypt = require('../');
 var vectors = require('./vectors');
@@ -87,7 +87,7 @@ _.forEach(modules, function(module) {
 
                 var start = new Date();
 
-                return q.when().then(function() {
+                return Promise.resolve().then(function() {
                     return digest(password, salt, iterations, justencrypt.KeyDerivation.keySizeBits / 8);
                 }).then(function() {
                     var time = (new Date()) - start;
@@ -103,7 +103,7 @@ _.forEach(modules, function(module) {
 
                 var start = new Date();
 
-                return q.all(_.repeat("1", n).split("").map(function() {
+                return Promise.all(_.repeat("1", n).split("").map(function() {
                     return digest(password, salt, iterations, justencrypt.KeyDerivation.keySizeBits / 8);
                 })).then(function() {
                     var time = (new Date()) - start;

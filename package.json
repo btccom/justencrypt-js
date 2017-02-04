@@ -32,7 +32,7 @@
   ],
   "dependencies": {
     "assert": "^1.4.1",
-    "q": "^1.4.1",
+    "es6-promise": "^4.0.5",
     "randombytes": "^2.0.3",
     "sjcl": "^1.0.6",
     "webworkify": "^1.4.0"
