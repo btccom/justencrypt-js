@@ -46,15 +46,7 @@ justencrypt.Encryption.decrypt(encryptedBuffer, new Buffer(rawPassword, 'utf8'))
 
 #### EncryptionMnemonic
 To make the result of `encrypt` human readable (so it is easier to write down) it's possible to encode it as an mnemonic.  
-We're using the Bitcoin BIP39 way of encoding entropy to mnemonic, but ignoring the (weak) password protection BIP39 originally had.  
-We also ensure the data is padded correctly.
-
-**IMPORTANT:** This is only meant to be used to encode results of `encrypt`, don't use this for anything else!
-
-```js
-var mnemonicString = justencrypt.EncryptionMnemonic.encode(encryptedBuffer);
-var encryptedBuffer = justencrypt.EncryptionMnemonic.decode(mnemonicString);
-```
+Use the `justencrypt-mnemonic` package for this!
 
 #### Choosing iterations
 The default iterations is `justencrypt.KeyDerivation.defaultIterations` and is set to **35000**, 
