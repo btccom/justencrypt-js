@@ -28,7 +28,7 @@ justencrypt.KeyDerivation.compute(new Buffer(rawPassword, 'utf8'), saltBuffer, i
 ```
 
 #### Encryption
-The result of `encrypt` is encoded as `iter || saltLen8 || salt || iv || tag || ct`,  
+The result of `encrypt` is encoded as `saltLen (uint8) || salt ($saltLen bytes) || iv (16 bytes) || ct || tag (16 bytes)`,  
 when this is fed into `decrypt` it will be able decode the salt and iterations used.
 
 ```js
@@ -61,6 +61,13 @@ Development / Contributing
 --------------------------
 You should have `mocha`, `istanbul` and `grunt-cli` installed globally, if not run `npm install -g mocha instanbul grunt-cli`.  
 Also recommended to have `phantomjs >= 1.9.8` on `$PATH` to speed up the `asmcrypto.js` build; https//github.com/Medium/phantomjs/releases/download/v1.9.19/phantomjs-1.9.8-linux-x86_64.tar.bz2
+
+To start development you need to do:
+
+```bash
+git submodule update --init --recursive # for asmcrypto.js
+grunt
+```
 
 Unit Tests are created with Mocha and can be ran with `npm test` (or `mocha`)
 
